@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>R6STRAT</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="./src/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="menuBar" class="rounded shadow"
+        style="position: fixed;width: 60px;height: 137px;top: 1rem;right: 1rem;z-index: 1;background-color: rgba(255, 255, 255, .7);">
+        <button id="logOutBtn" type="button" style="margin: 9px 13px 2px 13px;" class="btn btn-outline-primary btn-sm"
+            onclick="printAboutInfos()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+            </svg>
+        </button>
+        <hr class="menuBarDivider">
+        <button id="logOutBtn" type="button" style="margin-left: 13px;margin-top: 3px;"
+            class="btn btn-outline-secondary btn-sm" onclick="manageSectorNum(true);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
+                <path
+                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11z" />
+            </svg>
+        </button>
+        <button id="logOutBtn" type="button" style="margin: 9px 13px 2px 13px;" class="btn btn-outline-secondary btn-sm"
+            onclick="manageSectorNum(false);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
+                <path
+                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6H4z" />
+            </svg>
+        </button>
+    </div>
+
+    <ul class='custom-menu'>
+        <li id="removeLi" data-action="remove">Remove Icon</li>
+    </ul>
+
+    <div id="mainWindowContainer">
+        <canvas id="drawCanvas" style="position: absolute;"></canvas>
+        <div id="iconOverlayConatiner">
+        </div>
+    </div>
+
+    <div id="flexContainer">
+        <div id="toolBoxDiv" class="position-fixed card card-body shadow" style="opacity: .8;">
+            <a data-bs-toggle="collapse" data-bs-target="#toolBoxInner" aria-expanded="false"
+                aria-controls="toolBoxInner" style="color: #0d6efd;cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z" />
+                </svg>
+            </a>
+            <div id="toolBoxInner" class="collapse show">
+                <div id="itmesContainer">
+                    <div id="selectBtnContainer">
+                        <button id="selectResetIconBtn" type="button" class="btn btn-outline-danger btn-sm">Reset
+                            Icon</button>
+                        <button id="selectResetDrawBtn" type="button" class="btn btn-outline-danger btn-sm">Reset
+                            Draw</button>
+                        <button id="selectImportToImage" type="button" class="btn btn-outline-success btn-sm">Convert to
+                            Img</button>
+                    </div>
+                    <hr class="toolBoxDivider">
+                    <div id="mainItemsContainer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="imgPreLoadDiv">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+        crossorigin="anonymous"></script>
+    <script>
+        var type = navigator.appName;
+        if (type == 'Netscape') {
+            var userLang = navigator.language;
+        } else {
+            var userLang = navigator.userLanguage;
+        }
+
+        if (userLang === "ko-KR") {
+            document.querySelector("#selectResetIconBtn").innerText = "아이콘 초기화";
+            document.querySelector("#selectResetDrawBtn").innerText = "그림 초기화";
+            document.querySelector("#selectImportToImage").innerText = "이미지로 변환";
+            document.querySelector("#removeLi").innerText = "지우기";
+            alert("사용하기전 맵을 선택해주세요");
+        }
+        else {
+            alert("Please select map before use");
+        }
+    </script>
+    <script src="./src/js/html2canvas.js"></script>
+    <script src="./src/js/html2canvas.min.js"></script>
+    <script src="./src/js/imgPreLoad.js"></script>
+    <script src="./src/js/dragDrop.js"></script>
+    <script src="./src/js/manageCanvas.js"></script>
+    <script src="./src/js/manageMapBtn.js"></script>
+    <script src="./src/js/manageToolBox.js"></script>
+    <script>
+        const script_selectImportToImage = document.querySelector("#selectImportToImage"),
+            script_mainWindowContainer = document.querySelector("#mainWindowContainer");
+
+        function handleClickBtn(event) {
+            const maxWindowWidth = screen.availWidth,
+                maxWindowHeight = screen.availHeight;
+
+            if (window.outerWidth !== maxWindowWidth && window.outerHeight !== maxWindowHeight) {
+                if (userLang === "ko-KR") {
+                    alert("이미지로 변환하기전에 창 사이즈를 최대로 키워주세요.")
+                    return;
+                }
+                else {
+                    alert("Before import strategy to image, please set browser window to max size.")
+                    return;
+                }
+            }
+
+            html2canvas(script_mainWindowContainer).then(canvas => {
+                canvas.toBlob(function (blob) {
+                    const item = new ClipboardItem({ "image/png": blob });
+                    navigator.clipboard.write([item]);
+                });
+            });
+
+            if (userLang === "ko-KR") {
+                alert("이미지로 변환빛 복사완료.");
+            }
+            else {
+                alert("Complete convert to image and copy.");
+            }
+        }
+
+        function init() {
+            script_selectImportToImage.addEventListener("click", handleClickBtn);
+        }
+        init();
+    </script>
+    <script>
+        var targetIcon;
+
+        $(document).bind("contextmenu", function (event) {
+            event.preventDefault();
+            if (event.target.classList.contains("drag-and-drop")) {
+                $(".custom-menu").finish().toggle(100).
+                    css({
+                        top: event.pageY + "px",
+                        left: event.pageX + "px"
+                    });
+                targetIcon = event.target;
+            }
+        });
+
+        $(document).bind("mousedown", function (event) {
+            if (!$(event.target).parents(".custom-menu").length > 0) {
+                $(".custom-menu").hide(100);
+            }
+        });
+
+        $(".custom-menu li").click(function (event) {
+            switch ($(this).attr("data-action")) {
+                case "remove": removeIcon(targetIcon); break;
+            }
+            $(".custom-menu").hide(100);
+        });
+
+        function removeIcon(element) {
+            if (userLang === "ko-KR") {
+                if (!confirm("이 아이콘을 지우시겠습니까?")) {
+                    return;
+                }
+            }
+            else {
+                if (!confirm("Are you sure to erase this icon?")) {
+                    return;
+                }
+            }
+            element.remove();
+        }
+    </script>
+</body>
+
+</html>
