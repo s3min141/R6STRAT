@@ -18,6 +18,15 @@ const manageMapBtn_drawCanvas = document.querySelector("#drawCanvas"),
         "kafe": 3,
         "oregon": 2,
         "villa": 2,
+    },
+    manageMapBtb_minFloorList = {
+        "bank": -1,
+        "chalet": -1,
+        "clubhouse": -1,
+        "coastline": 1,
+        "kafe": 1,
+        "oregon": -1,
+        "villa": -1,
     };
 
 function manageSectorNum(isUp) {
@@ -40,7 +49,8 @@ function manageSectorNum(isUp) {
         loadMapImage(manageMapBtn_drawCanvas.dataset.nowMap, false);
     }
     else {
-        if (manage_MapBtn_nowFloor <= -1) {
+        const minFloor = manageMapBtb_minFloorList[manageMapBtn_drawCanvas.dataset.nowMap];
+        if (manage_MapBtn_nowFloor <= minFloor) {
             if (userLang === "ko-KR") {
                 alert("가장 아랫층입니다!");
             }
