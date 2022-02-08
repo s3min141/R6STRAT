@@ -64,7 +64,7 @@
     <div id="flexContainer">
         <div id="toolBoxDiv" class="position-fixed card card-body shadow" style="opacity: .8;">
             <a data-bs-toggle="collapse" data-bs-target="#toolBoxInner" aria-expanded="false"
-                aria-controls="toolBoxInner" style="color: #0d6efd;cursor: pointer;">
+                aria-controls="toolBoxInner" style="color: #0d6efd;cursor: pointer;" onclick="hideUpperRightMenuBar();">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -130,6 +130,16 @@
                     localStorage.setItem("userLang", "ko-KR");
                     location.reload();
                 }
+            }
+        }
+
+        function hideUpperRightMenuBar() {
+            const menuBar = document.querySelector("#menuBar");
+            if (menuBar.getAttribute("hidden") === null) {
+                menuBar.setAttribute("hidden", "");
+            }
+            else {
+                menuBar.removeAttribute("hidden");
             }
         }
 
