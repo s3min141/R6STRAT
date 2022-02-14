@@ -8,6 +8,23 @@ function preload(imgUrlArray) {
 }
 
 preload([
+    "./src/img/mapImg/chalet/chalet1f.png", //map
+    "./src/img/mapImg/chalet/chalet2f.png",
+    "./src/img/mapImg/chalet/chaletb1f.png",
+    "./src/img/mapImg/clubhouse/clubhouse1f.png",
+    "./src/img/mapImg/clubhouse/clubhouse2f.png",
+    "./src/img/mapImg/clubhouse/clubhouseb1f.png",
+    "./src/img/mapImg/coastline/coastline1f.png",
+    "./src/img/mapImg/coastline/coastline2f.png",
+    "./src/img/mapImg/kafe/kafe1f.png",
+    "./src/img/mapImg/kafe/kafe2f.png",
+    "./src/img/mapImg/kafe/kafe3f.png",
+    "./src/img/mapImg/oregon/oregon1f.png",
+    "./src/img/mapImg/oregon/oregon2f.png",
+    "./src/img/mapImg/oregon/oregonb1f.png",
+    "./src/img/mapImg/villa/villa1f.png",
+    "./src/img/mapImg/villa/villa2f.png",
+    "./src/img/mapImg/villa/villab1f.png",
     "./src/img/attackerIcon/sledge.png", //attacker
     "./src/img/attackerIcon/thatcher.png",
     "./src/img/attackerIcon/ash.png",
@@ -87,22 +104,5 @@ preload([
     "./src/img/gadgetIcon/wire.jpg",
     "./src/img/mapImg/bank/bank1f.png",
     "./src/img/mapImg/bank/bank2f.png",
-    "./src/img/mapImg/bank/bankb1f.png",
-    "./src/img/mapImg/chalet/chalet1f.png",
-    "./src/img/mapImg/chalet/chalet2f.png",
-    "./src/img/mapImg/chalet/chaletb1f.png",
-    "./src/img/mapImg/clubhouse/clubhouse1f.png",
-    "./src/img/mapImg/clubhouse/clubhouse2f.png",
-    "./src/img/mapImg/clubhouse/clubhouseb1f.png",
-    "./src/img/mapImg/coastline/coastline1f.png",
-    "./src/img/mapImg/coastline/coastline2f.png",
-    "./src/img/mapImg/kafe/kafe1f.png",
-    "./src/img/mapImg/kafe/kafe2f.png",
-    "./src/img/mapImg/kafe/kafe3f.png",
-    "./src/img/mapImg/oregon/oregon1f.png",
-    "./src/img/mapImg/oregon/oregon2f.png",
-    "./src/img/mapImg/oregon/oregonb1f.png",
-    "./src/img/mapImg/villa/villa1f.png",
-    "./src/img/mapImg/villa/villa2f.png",
-    "./src/img/mapImg/villa/villab1f.png",
+    "./src/img/mapImg/bank/bankb1f.png"
 ]);

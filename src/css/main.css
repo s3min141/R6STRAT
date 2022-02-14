@@ -1,41 +1,79 @@
-body {
+html, body {
+    font-family: "BMJUA";
+    width: 100%;
+    height: 100%;
     background-color: #bdc3c7;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#captureDiv img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 #toolBoxDiv {
-    width: 90%;
+    width: 100%;
+    height: 30%;
     text-align: center;
-    padding: 5px;
-    bottom: 0.5rem;
+    font-family: "BMJUA";
+    opacity: .8;
+    overflow: auto;
+    max-width: 100%;
 }
 
-#flexContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#itmesContainer {
+#alertList {
     margin-top: 10px;
+}
+
+.drawToolIcon {
+    width: 33px;
+    height: 33px;
+}
+
+.btn {
+    margin-bottom: 5px;
+}
+
+.alertCss {
+    margin-bottom: 10px;
 }
 
 input[type="image"].active {
     border: 0.1rem solid black;
 }
 
-.toolBoxDivider {
-    margin: 10px;
+.divider {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 2px !important;
+    background-color: black;
 }
 
 .menuBarDivider {
     margin: 5px 0px;
 }
+
 .operatorIcon {
-    width: 35px;
-    height: 35px;
+    cursor: pointer;
+    width: 33px;
+    height: 33px;
 }
 
 .gadgetIcon {
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+}
+
+.drawingToolBtn {
     width: 30px;
     height: 30px;
 }
@@ -70,4 +108,30 @@ input[type="image"].active {
 
 .custom-menu li:hover {
     background-color: #DEF;
+}
+
+.scroll{
+    width: 100px;
+    padding: 0px 13px 0px 13px;
+    overflow-y: scroll;
+    height: 200px;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Nanum Gothic';
+    margin-right: 50px;
+}
+
+.scroll::-webkit-scrollbar{
+    width: 6px;
+}
+
+.scroll::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: #bdc3c7;
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;    
+}
+
+.scroll::-webkit-scrollbar-track{
+    background-color: rgba(0,0,0,0);
 }

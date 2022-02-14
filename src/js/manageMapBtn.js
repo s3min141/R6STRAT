@@ -34,10 +34,10 @@ function manageSectorNum(isUp) {
         const maxFloor = manageMapBtb_maxFloorList[manageMapBtn_drawCanvas.dataset.nowMap];
         if (manage_MapBtn_nowFloor >= maxFloor) {
             if (userLang === "ko-KR") {
-                alert("가장 높은층입니다!");
+                showAlert("가장 높은층입니다!", "warning");
             }
             else {
-                alert("maximum floor!");
+                showAlert("maximum floor!", "warning");
             }
             return;
         }
@@ -52,10 +52,10 @@ function manageSectorNum(isUp) {
         const minFloor = manageMapBtb_minFloorList[manageMapBtn_drawCanvas.dataset.nowMap];
         if (manage_MapBtn_nowFloor <= minFloor) {
             if (userLang === "ko-KR") {
-                alert("가장 아랫층입니다!");
+                showAlert("가장 아랫층입니다!", "warning");
             }
             else {
-                alert("minimum floor!");
+                showAlert("minimum floor!", "warning");
             }
             return;
         }
@@ -90,8 +90,8 @@ function loadMapImage(mapName, isMapButton) {
 
         if (element.src.includes("mapImg") && element.src.includes(`${mapName}${nowStair}f`)) {
             element.id = "mapImg";
-            element.width = screen.width;
-            element.height = screen.height;
+            element.addEventListener("load", resizeToolBoxHeight);
+            element.addEventListener("load", fitToContainer);
 
             if ($("#mapImg") !== null) {
                 $("#mapImg").remove();

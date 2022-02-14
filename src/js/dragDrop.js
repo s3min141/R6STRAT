@@ -35,9 +35,6 @@ function handleMouseDownEvent(event) {
 
 function handleMouseUpEvent(event) {
     event.preventDefault();
-    if (event.button === 1) {
-        alert("Right Click!");
-    }
     const targetElement = event.target;
     targetElement.classList.remove("nowDragging");
 }

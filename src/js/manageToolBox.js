@@ -71,6 +71,7 @@ function addOperatorIcons() {
 function addGadgetIcons() {
     const gadgetDiv = document.createElement("div");
     gadgetDiv.id = "gadgetTabDiv";
+    gadgetDiv.style.marginBottom = "10px";
 
     preloadedImages.forEach((element) => {
         if (element.src.includes("gadgetIcon")) {
@@ -86,60 +87,6 @@ function addGadgetIcons() {
     dragDropMain();
 }
 
-function addDrawToolIcons() {
-    const drawToolTabDiv = document.createElement("div");
-    const colorLabel = document.createElement("label");
-    const thicknessLabel = document.createElement("label");
-    const selectColor = document.createElement("input");
-    const selectThickness = document.createElement("input");
-    const selectPencil = document.createElement("input");
-    const selectEraser = document.createElement("input");
-
-    if (userLang === "ko-KR") {
-        colorLabel.innerText = "색: ";
-        thicknessLabel.innerText = "굵기: ";
-    }
-    else {
-        colorLabel.innerText = "Color: ";
-        thicknessLabel.innerText = "Thickness: ";
-    }
-
-    colorLabel.style.marginRight = "10px";
-    selectColor.id = "colorPicker";
-    selectColor.type = "color";
-    selectThickness.id = "thicknessPicker";
-    selectThickness.type = "number";
-    selectThickness.value = "5";
-    selectThickness.min = "1";
-    selectThickness.max = "30";
-
-    selectPencil.id = "pencilBtn";
-    selectPencil.type = "image";
-    selectPencil.src = "./src/img/drawToolIcon/pencil.png";
-    selectPencil.classList.add("active");
-    selectPencil.style.width = "30px";
-    selectPencil.style.height = "30px";
-    selectPencil.style.marginLeft = "13px";
-    selectPencil.setAttribute("onclick", "Tool(1);");
-
-    selectEraser.id = "eraserBtn";
-    selectEraser.type = "image";
-    selectEraser.src = "./src/img/drawToolIcon/eraser.png";
-    selectEraser.style.width = "30px";
-    selectEraser.style.height = "30px";
-    selectEraser.style.marginLeft = "13px";
-    selectEraser.setAttribute("onclick", "Tool(2);");
-
-    colorLabel.appendChild(selectColor);
-    thicknessLabel.appendChild(selectThickness);
-
-    drawToolTabDiv.appendChild(colorLabel);
-    drawToolTabDiv.appendChild(thicknessLabel);
-    drawToolTabDiv.appendChild(selectPencil);
-    drawToolTabDiv.appendChild(selectEraser);
-    toolManage_mainItemsContainer.appendChild(drawToolTabDiv);
-}
-
 function deleteCanvas() {
     var drawCanvas = document.querySelector("#drawCanvas");
     var ctx = drawCanvas.getContext("2d");
@@ -147,11 +94,13 @@ function deleteCanvas() {
     if (userLang === "ko-KR") {
         if (confirm("모든 그림을 지우시겠습니까?")) {
             ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            showAlert("모든 그림을 지웠습니다", "success");
         }
     }
     else {
         if (confirm("Are you sure to erase all drawing?")) {
             ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+            showAlert("Drawing has cleared", "success");
         }
     }
 }
@@ -160,23 +109,28 @@ function resetIcon() {
     if (userLang === "ko-KR") {
         if (confirm("모든 아이콘을 지우시겠습니까?")) {
             $("#iconOverlayConatiner").empty();
+            showAlert("모든 아이콘을 지웠습니다", "success");
         }
     }
     else {
         if (confirm("Are you sure to erase all icons?")) {
             $("#iconOverlayConatiner").empty();
+            showAlert("Icon has cleared", "success");
         }
     }
 }
 
-function printAboutInfos() {
+function setAboutInfos() {
+    const infoContent = document.querySelector("#infoContent"),
+        manualContent = document.querySelector("#manualContent");
+
     if (userLang === "ko-KR") {
-        alert('*Made by SeMin*\n\n참조: R6TAC_ALLMAPS(otariga) + r6operators(marcopixel)\n도움: AssassIn(이동영)');
-        alert('*사용법*\n\n[드래그앤드랍 아이콘]\n*오퍼레이터* 또는 *가젯*탭에서 아이콘들을 찾아볼수있습니다.\n클릭하면 마우스포인터에 복사되어 따라다니며 한번더 클릭시 그 위치에 놔둘수있습니다.\n\n[맵선택]\n*Map*탭에서 맵을 선택할수있으며, 오른쪽상단의 컨트롤 메뉴에서 층을 선택할수있습니다.\n\n[이미지로 변환]\n*이미지로 변환*이라고 된 버튼을 누르게 되면 작성한 전략의 스크린샷이 클립보드에 복사됩니다.');
+        infoContent.innerText = "*참조*\nR6TAC_ALLMAPS(otariga)\nr6operators[Copyright (c) 2021 Marco Vockner (MIT License)]\n도움: AssassIn(이동영)";
+        manualContent.innerText = "*사용법*\n\n[드래그앤드랍 아이콘]\n*오퍼레이터* 또는 *가젯*탭에서 아이콘들을 찾아볼수있습니다.\n클릭하면 마우스포인터에 복사되어 따라다니며 한번더 클릭시 그 위치에 놔둘수있으며 아이콘을 오른쪽클릭시 삭제가 가능합니다.\n\n[맵선택]\n*Map*탭에서 맵을 선택할수있으며, 오른쪽상단의 컨트롤 메뉴에서 층을 선택할수있습니다.\n\n[이미지로 변환]\n*이미지로 변환*이라고 된 버튼을 누르게 되면 작성한 전략의 스크린샷이 클립보드에 복사됩니다.";
     }
     else {
-        alert('*Made by SeMin*\n\nReference: R6TAC_ALLMAPS(otariga) + r6operators(marcopixel)\nHelper: AssassIn(Lee Dong Young)');
-        alert('*How to use*\n\n[Drag&Drop Icons]\nyou can select icon on *Tab* after click it and it will duplicate to your mouse pointer then drop where you want\nalso you can erase icon one by one, if you right click icon it will show custom menu, click remove button then it will erase icon\n\n[Map Selection]\nyou can select map on *Tab* and also you can select floor by control panel where located at upper right\n\n[Convert to image]\nwhen you clicked *Convert to image* Button your strategy will copy to clipborad');
+        infoContent.innerText = "*Reference*\nR6TAC_ALLMAPS(otariga)\nr6operators[Copyright (c) 2021 Marco Vockner (MIT License)]\nHelper: AssassIn(Lee Dong Young)";
+        manualContent.innerText = "*How to use*\n\n[Drag&Drop Icons]\nyou can select icon on *Tab* after click it and it will duplicate to your mouse pointer then drop where you want\nalso you can erase icon one by one, if you right click icon it will show custom menu, click remove button then it will erase icon\n\n[Map Selection]\nyou can select map on *Tab* and also you can select floor by control panel where located at upper right\n\n[Convert to image]\nwhen you clicked *Convert to image* Button your strategy will copy to clipborad";
     }
 }
 
@@ -190,13 +144,15 @@ function init() {
     addMapImage();
     addOperatorIcons();
     addGadgetIcons();
-    addDrawToolIcons();
 
-    $("#mapTabDiv").after(createDivider("toolBoxDivider"));
-    $("#operatorTabDiv").after(createDivider("toolBoxDivider"));
-    $("#gadgetTabDiv").after(createDivider("toolBoxDivider"));
+    $("#mapTabDiv").after(createDivider("divider"));
+    $("#drawingToolDiv").after(createDivider("divider"));
+    $("#operatorTabDiv").after(createDivider("divider"));
+    $("#attackerDiv").after(createDivider("divider"));
 
     toolManage_selectResetIcon.addEventListener("click", resetIcon);
     toolManage_selectResetDrawBtn.addEventListener("click", deleteCanvas);
+
+    loadMapImage("bank", false);
 }
 init();
