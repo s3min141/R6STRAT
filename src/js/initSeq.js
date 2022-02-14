@@ -40,7 +40,7 @@ function resizeToolBoxHeight() {
         toolBoxDiv.style.height = `${innerHeight - (mapImg.height + 2)}px`;
     }
     else {
-        toolBoxDiv.style.height = "687px";
+        toolBoxDiv.style.height = "685px";
     }
 }
 
